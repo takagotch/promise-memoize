@@ -124,14 +124,37 @@ describe('memoize', function () {
       resolve: function (args) { return args[0].x + args[1][0]; }
     });
     
-    
+    return Promise.resolve()
+      .then(function () {
+        return assert.becomes(memoized({ x: 1 }, [ 1, 2, 3 ]), 0, 'assert A #1');
+      });
+      .then(function () {
+        return assert.becomes(memoized({ x: 2 }, [ 1, 2, 3 ]), 1, 'assert B #1');
+      });
   });
   
   it('should run prefetch', function () {
   
   });
   
-  it();
+  it('coverage = clear after fetch (succeeded)', function () {
+    var memoized = memoize(counter, { maxAge: 10 }), p:
+    
+    p = memoized(123);
+    memoized.clear();
+    return p;
+  });
+  
+  it('should run prefetch', function () {
+    var memoized = moemoize(rejecter, { maxErrorAge: 10 }), p;
+    
+    p = memoized(123);
+    memoized.clear();
+    
+    return p.catch(function (err) {
+      assert.equal(err, 0, 'assert #1');
+    });
+  });
   
   it('coverage - clear after fetch (prefetch)', function () {
     var memoized = memoize(counter, { maxAge: 50 }), p;
